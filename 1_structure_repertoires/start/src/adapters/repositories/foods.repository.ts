@@ -10,11 +10,26 @@ export function FoodsRespository() {
       return { data, error };
     },
 
+    async getFoodById(id: string): Promise<{ data: Food; error?: Error }> {
+      const foodsGateway = FoodsGateway.getInstance();
+
+      const { data, error } = await (foodsGateway as FoodsGateway).getFoodById(id);
+      return { data, error };
+    },
+
     async createFood(food: Food): Promise<{ data: boolean; error?: Error }> {
       const foodsGateway = FoodsGateway.getInstance();
 
       const { data, error } = await (foodsGateway as FoodsGateway).createFood(food);
       console.log('created food data', data);
+      return { data, error };
+    },
+
+    async updateFood(food: Food): Promise<{ data: boolean; error?: Error }> {
+      const foodsGateway = FoodsGateway.getInstance();
+
+      const { data, error } = await (foodsGateway as FoodsGateway).updateFood(food);
+      console.log('updated food data', data);
       return { data, error };
     },
   };

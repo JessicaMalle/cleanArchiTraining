@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createFoodUseCase } from '@foodsapp/usecases/foods.usecase';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createFoodUseCase, getFoodByIdUseCase, updateFoodUseCase } from '@foodsapp/usecases/foods.usecase';
 import { Food } from '@foodsapp/models/food.interface';
-import { AppDispatch } from '@foodsapp/store';
-import { useNavigate } from 'react-router-dom';
+import { AppDispatch, RootState } from '@foodsapp/store';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FoodEntity } from '@foodsapp/domain/entities/FoodEntity';
 
 export function FoodEditPageViewModel() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { foodId } = useParams<{ foodId: string }>();
+  const currentFood = useSelector((state: RootState) => state.foods.currentFood);
   const [food, setFood] = useState<Food>({} as Food);
+  const isEditMode = !!foodId;
+
+  // Load food data if in edit mode
+  useEffect(() => {
+    if (isEditMode) {
+      dispatch(getFoodByIdUseCase(foodId));
+    }
+  }, [dispatch, foodId, isEditMode]);
+
+  // Update local state when currentFood changes
+  useEffect(() => {
+    if (currentFood && isEditMode) {
+      setFood(currentFood);
+    }
+  }, [currentFood, isEditMode]);
 
   const onChangeTitle = (title: string) => {
     setFood((prev: Food) => ({ ...prev, title }));
@@ -41,11 +58,17 @@ export function FoodEditPageViewModel() {
       return;
     }
 
-    const res = await dispatch(createFoodUseCase(food));
+    let res;
+    if (isEditMode) {
+      res = await dispatch(updateFoodUseCase(food));
+    } else {
+      res = await dispatch(createFoodUseCase(food));
+    }
+
     if (res?.meta?.requestStatus === 'fulfilled') {
       navigate('/');
     }
   };
 
-  return { onChangeTitle, onChangeDescription, onChangeImage, onSubmit };
+  return { onChangeTitle, onChangeDescription, onChangeImage, onSubmit, food, isEditMode };
 }

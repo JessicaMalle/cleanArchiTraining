@@ -1,7 +1,9 @@
-import { Box, Image } from '@chakra-ui/react';
+import {Box, IconButton, Image} from '@chakra-ui/react';
 import { container as DI } from '@foodsapp/di/ioc';
 import { Food } from '@foodsapp/models/food.interface';
 import { Card } from '../Card/Card';
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 interface FoodCardProps {
   food: Food;
@@ -10,6 +12,7 @@ interface FoodCardProps {
 export const FoodCard = ({ food }: FoodCardProps) => {
   const { bgColorTitleCard, colorTitleCard, handleMouseEnterCard, handleMouseLeaveCard } =
     DI.resolve('foodCard');
+  const navigate = useNavigate();
 
   return (
     <Card.Root
@@ -31,6 +34,17 @@ export const FoodCard = ({ food }: FoodCardProps) => {
             {food?.title}
           </Card.Title>
           <Card.Description>{food?.description}</Card.Description>
+          <Card.Footer>
+            <IconButton
+              aria-label='Edit food'
+              icon={<EditIcon />}
+              onClick={() => navigate(`/edit/${food.id}`)}
+            />
+            <IconButton
+              aria-label='Search database'
+              icon={<DeleteIcon />}
+            />
+          </Card.Footer>
         </Card.Body>
       </Box>
     </Card.Root>

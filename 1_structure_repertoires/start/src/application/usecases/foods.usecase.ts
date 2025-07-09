@@ -6,10 +6,13 @@ import { FoodsState } from '@foodsapp/models/foods.interface';
 
 const initialState: FoodsState = {
   data: [],
+  currentFood: null,
   isLoading: false,
   errors: {
     getFoodsUseCaseErrorMessage: '',
+    getFoodByIdUseCaseErrorMessage: '',
     createFoodUseCaseErrorMessage: '',
+    updateFoodUseCaseErrorMessage: '',
   },
 };
 
@@ -30,6 +33,18 @@ const foodsSlice = createSlice({
       state.errors.getFoodsUseCaseErrorMessage = action.error.message ?? 'unknown error';
     });
 
+    builder.addCase(getFoodByIdUseCase.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getFoodByIdUseCase.fulfilled, (state, action) => {
+      state.currentFood = action.payload || null;
+      state.isLoading = false;
+    });
+    builder.addCase(getFoodByIdUseCase.rejected, (state, action) => {
+      state.isLoading = false;
+      state.errors.getFoodByIdUseCaseErrorMessage = action.error.message ?? 'unknown error';
+    });
+
     builder.addCase(createFoodUseCase.pending, (state) => {
       state.isLoading = true;
     });
@@ -41,6 +56,19 @@ const foodsSlice = createSlice({
     builder.addCase(createFoodUseCase.rejected, (state, action) => {
       state.isLoading = false;
       state.errors.createFoodUseCaseErrorMessage = action.error.message ?? 'unknown error';
+    });
+
+    builder.addCase(updateFoodUseCase.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateFoodUseCase.fulfilled, (state) => {
+      state.isLoading = false;
+      // The food was updated successfully
+      // The component can dispatch getFoodsUseCase to refresh the list if needed
+    });
+    builder.addCase(updateFoodUseCase.rejected, (state, action) => {
+      state.isLoading = false;
+      state.errors.updateFoodUseCaseErrorMessage = action.error.message ?? 'unknown error';
     });
   },
 });
@@ -80,6 +108,32 @@ export const createFoodUseCase = createAsyncThunk(
     try {
       const { data: createdFood } = await FoodsRespository().createFood(food);
       return createdFood;
+    } catch (e) {
+      const error = e as Error;
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getFoodByIdUseCase = createAsyncThunk(
+  'foods/getFoodById',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const { data: food } = await FoodsRespository().getFoodById(id);
+      return food;
+    } catch (e) {
+      const error = e as Error;
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateFoodUseCase = createAsyncThunk(
+  'foods/updateFood',
+  async (food: Food, { rejectWithValue }) => {
+    try {
+      const { data: updatedFood } = await FoodsRespository().updateFood(food);
+      return updatedFood;
     } catch (e) {
       const error = e as Error;
       return rejectWithValue(error);

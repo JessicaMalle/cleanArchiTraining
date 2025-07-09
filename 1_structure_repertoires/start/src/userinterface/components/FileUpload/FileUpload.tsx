@@ -1,14 +1,22 @@
-import { ReactNode, useState, useRef } from 'react';
+import { ReactNode, useState, useRef, useEffect } from 'react';
 import { Box, Button, Image, Text } from '@chakra-ui/react';
 
 interface FileUploadProps {
   onChange?: (imageUrl: string) => void;
   label?: string;
+  value?: string;
 }
 
-function FileUpload({ onChange, label = 'Upload Image' }: FileUploadProps): ReactNode {
-  const [preview, setPreview] = useState<string | null>(null);
+function FileUpload({ onChange, label = 'Upload Image', value = '' }: FileUploadProps): ReactNode {
+  const [preview, setPreview] = useState<string | null>(value || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Update preview when value prop changes
+  useEffect(() => {
+    if (value && value !== preview) {
+      setPreview(value);
+    }
+  }, [value, preview]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
