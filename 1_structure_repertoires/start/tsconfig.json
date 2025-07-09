@@ -25,7 +25,16 @@
 
     /* Alias */
     "paths": {
-      // TODO
+      "@foodsapp/di/*": ["src/di/*"],
+      "@foodsapp/domain/*": ["src/domain/*"],
+      "@foodsapp/models/*": ["src/application/models/*"],
+      "@foodsapp/usecases/*": ["src/application/usecases/*"],
+      "@foodsapp/infrastructure/*": ["src/infrastructure/*"],
+      "@foodsapp/utils/*": ["src/utils/*"],
+      "@foodsapp/store": ["src/store/store.ts"],
+      "@foodsapp/components/*": ["src/userinterface/components/*"],
+      "@foodsapp/pages/*": ["src/userinterface/pages/*"],
+      "@foodsapp/adapters/*": ["src/adapters/*"]
     }
   },
   "include": ["src"]
