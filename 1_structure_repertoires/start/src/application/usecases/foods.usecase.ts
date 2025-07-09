@@ -87,11 +87,12 @@ export const getFoodsUseCase = createAsyncThunk(
     }
   },
   {
-    condition: (_: void, { getState }: { getState: RootState }) => {
-      const { isLoading } = getState().foods;
-      if (isLoading) {
+    condition: (_: void, { getState }) => {
+      const { foods } = getState() as RootState;
+      if (foods.isLoading) {
         return false;
       }
+      return undefined;
     },
   }
 );
