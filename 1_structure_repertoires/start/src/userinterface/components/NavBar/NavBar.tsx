@@ -14,6 +14,9 @@ function NavBar(): ReactNode {
 			backdropFilter="blur(6px)"
 			boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
 			padding="1rem"
+			height="80px" // Fixed height for navbar
+			display="flex"
+			alignItems="center"
 		>
 			<Flex justify="center" gap="2rem">
 				<Button

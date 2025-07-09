@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import {createFoodUseCase} from "@foodsapp/usecases/foods.usecase";
 import {Food} from "@foodsapp/models/food.interface";
 import { AppDispatch } from "@foodsapp/store";
+import {useNavigate} from "react-router-dom";
 
 export function FoodEditPageViewModel() {
+	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>();
 	const [food, setFood] = useState<Food>({} as Food);
 
@@ -12,10 +14,26 @@ export function FoodEditPageViewModel() {
 		setFood((prev: Food) => ({...prev, title}))
 	}
 
-	const onSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		dispatch(createFoodUseCase(food));
+	const onChangeDescription = (description: string) => {
+		setFood((prev: Food) => ({...prev, description}))
 	}
 
-	return {onChangeTitle, onSubmit};
+	const onChangeImage = (imageUrl: string) => {
+		setFood((prev: Food) => ({
+			...prev,
+			thumbnail: {
+				url: imageUrl
+			}
+		}))
+	}
+
+	const onSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const res = await dispatch(createFoodUseCase(food));
+		if (res?.meta?.requestStatus === 'fulfilled') {
+			navigate('/');
+		}
+	}
+
+	return {onChangeTitle, onChangeDescription, onChangeImage, onSubmit};
 }
