@@ -7,7 +7,6 @@ export function FoodsRespository() {
       const foodsGateway = FoodsGateway.getInstance();
 
       const { data, error } = await (foodsGateway as FoodsGateway).getFoods();
-      console.log('gateway data', data);
       return { data, error };
     },
 

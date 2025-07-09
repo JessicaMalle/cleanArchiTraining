@@ -1,13 +1,12 @@
 import { Singleton } from '@foodsapp/infrastructure/helper/singleton';
 import axios from 'axios';
-import { Food } from '@foodsapp/application/models/food.interface';
+import {Food} from "@foodsapp/models/food.interface.ts";
 
 export class FoodsGateway extends Singleton {
   async getFoods() {
     try {
       const res = await axios.get('/fakeApi/getFoods');
       const data = res.data;
-      console.log('foods gateway data ', data);
       return { data };
     } catch (e) {
       const error = e as Error;
@@ -19,7 +18,6 @@ export class FoodsGateway extends Singleton {
     try {
       const res = await axios.post('/fakeApi/createFood', food);
       const data = res.data;
-      console.log('created food data ', data);
       return { data };
     } catch (e) {
       const error = e as Error;
