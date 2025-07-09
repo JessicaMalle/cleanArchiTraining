@@ -13,7 +13,11 @@ function App() {
     },
     { path: '/display/:foodId', element: <FoodDisplayPage /> },
     { path: '*', element: <Navigate to="/" replace /> },
-  ]);
+  ], {
+    future: {
+      v7_startTransition: true,
+    },
+  });
   return <RouterProvider router={router} fallbackElement={<DashboardPage />} />;
 }
 
