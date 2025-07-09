@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createFoodUseCase, getFoodByIdUseCase, updateFoodUseCase } from '@foodsapp/usecases/foods.usecase';
+import { createFoodUseCase, getFoodByIdUseCase, updateFoodUseCase, selectIsLoadingFoods } from '@foodsapp/usecases/foods.usecase';
 import { Food } from '@foodsapp/models/food.interface';
 import { AppDispatch, RootState } from '@foodsapp/store';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ export function FoodEditPageViewModel() {
   const dispatch = useDispatch<AppDispatch>();
   const { foodId } = useParams<{ foodId: string }>();
   const currentFood = useSelector((state: RootState) => state.foods.currentFood);
+  const isLoading = useSelector(selectIsLoadingFoods);
   const [food, setFood] = useState<Food>({} as Food);
   const isEditMode = !!foodId;
 
@@ -70,5 +71,5 @@ export function FoodEditPageViewModel() {
     }
   };
 
-  return { onChangeTitle, onChangeDescription, onChangeImage, onSubmit, food, isEditMode };
+  return { onChangeTitle, onChangeDescription, onChangeImage, onSubmit, food, isEditMode, isLoading };
 }
