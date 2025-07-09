@@ -13,8 +13,12 @@ function FileUpload({ onChange, label = 'Upload Image', value = '' }: FileUpload
 
   // Update preview when value prop changes
   useEffect(() => {
-    if (value && value !== preview) {
-      setPreview(value);
+    if (value) {
+      if (value !== preview) {
+        setPreview(value);
+      }
+    } else {
+      setPreview(null);
     }
   }, [value, preview]);
 

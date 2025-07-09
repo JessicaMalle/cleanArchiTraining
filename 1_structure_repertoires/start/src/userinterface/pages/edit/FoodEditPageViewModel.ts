@@ -22,10 +22,21 @@ export function FoodEditPageViewModel() {
     }
   }, [dispatch, foodId, isEditMode]);
 
-  // Update local state when currentFood changes
+  // Update local state when currentFood changes or when edit mode changes
   useEffect(() => {
     if (currentFood && isEditMode) {
       setFood(currentFood);
+    } else if (!isEditMode) {
+      // Reset food state when in create mode
+      setFood({
+        id: '',
+        title: '',
+        description: '',
+        createdAt: '',
+        thumbnail: {
+          url: ''
+        }
+      } as Food);
     }
   }, [currentFood, isEditMode]);
 
