@@ -1,9 +1,9 @@
-import {Box, IconButton, Image} from '@chakra-ui/react';
+import { Heading, IconButton, Image, Stack, Text} from '@chakra-ui/react';
 import { container as DI } from '@foodsapp/di/ioc';
 import { Food } from '@foodsapp/models/food.interface';
-import { Card } from '../Card/Card';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
+import { Card, CardBody, CardFooter } from '@chakra-ui/react'
 
 interface FoodCardProps {
   food: Food;
@@ -15,38 +15,41 @@ export const FoodCard = ({ food }: FoodCardProps) => {
   const navigate = useNavigate();
 
   return (
-    <Card.Root
-      flexDirection="row"
-      overflow="hidden"
-      width="48rem"
-      height="16rem"
+    <Card
+      direction={{ base: 'column', sm: 'row' }}
+      overflow='hidden'
+      variant='outline'
       onMouseEnter={handleMouseEnterCard}
       onMouseLeave={handleMouseLeaveCard}
-      cursor="pointer"
-      data-testid={`food-card-${food.id}`}
     >
-      <Box position="relative" width="20rem" height="100%" bg="gray.400" overflow="hidden">
-        <Image src={food?.thumbnail?.url} objectFit="cover" width="100%" height="100%" zIndex="1" />
-      </Box>
-      <Box flex="1">
-        <Card.Body height="100%" bg={bgColorTitleCard} transition="background 0.15s">
-          <Card.Title color={colorTitleCard} transition="color 0.15s" mb="2">
-            {food?.title}
-          </Card.Title>
-          <Card.Description>{food?.description}</Card.Description>
-          <Card.Footer>
-            <IconButton
-              aria-label='Edit food'
-              icon={<EditIcon />}
-              onClick={() => navigate(`/edit/${food.id}`)}
-            />
-            <IconButton
-              aria-label='Search database'
-              icon={<DeleteIcon />}
-            />
-          </Card.Footer>
-        </Card.Body>
-      </Box>
-    </Card.Root>
+      <Image
+        objectFit='cover'
+        maxW={{ base: '100%', sm: '200px' }}
+        src={food.thumbnail.url}
+        alt='Caffe Latte'
+      />
+
+      <Stack>
+        <CardBody bg={bgColorTitleCard}>
+          <Heading size='md' color={colorTitleCard}>{food.title}</Heading>
+
+          <Text py='2'>
+            {food.description}
+          </Text>
+        </CardBody>
+
+        <CardFooter>
+          <IconButton
+            aria-label='Edit food'
+            icon={<EditIcon />}
+            onClick={() => navigate(`/edit/${food.id}`)}
+          />
+          <IconButton
+            aria-label='Search database'
+            icon={<DeleteIcon />}
+          />
+        </CardFooter>
+      </Stack>
+    </Card>
   );
 };

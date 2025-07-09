@@ -15,6 +15,7 @@ function App() {
     { path: '*', element: <Navigate to="/" replace /> },
   ], {
     future: {
+      // @ts-ignore
       v7_startTransition: true,
     },
   });

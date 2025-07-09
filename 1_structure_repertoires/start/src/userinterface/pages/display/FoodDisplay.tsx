@@ -8,9 +8,10 @@ import {
   VStack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Food } from '@foodsapp/models/food.interface.ts';
+import { container } from '@foodsapp/di/ioc.ts';
 
-export const FoodDisplayPage = ({ food }: { food: Food }) => {
+export const FoodDisplayPage = () => {
+  const { food } = container.resolve('display');
   // Formatage de la date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -20,6 +21,14 @@ export const FoodDisplayPage = ({ food }: { food: Food }) => {
       year: 'numeric',
     }).format(date);
   };
+
+  if (!food) {
+    return (
+      <Box maxW="1200px" mx="auto" p={6} my={8}>
+        <Text>Chargement...</Text>
+      </Box>
+    );
+  }
 
   return (
     <Box

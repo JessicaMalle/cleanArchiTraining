@@ -11,11 +11,11 @@ export const handlers = [
     return HttpResponse.json(foodFakeData);
   }),
 
-  http.get('/fakeApi/getFood/:foodId', async ({ params }: { params: any }) => {
+  http.get('/fakeApi/getFoodById/:id', async ({ params }: { params: any }) => {
     await delay(ARTIFICIAL_DELAY_MS);
 
-    const { foodId } = params;
-    const food = foodFakeData.find((food) => food.id === foodId);
+    const { id } = params;
+    const food = foodFakeData.find((food) => food.id === id);
 
     return HttpResponse.json(food);
   }),
@@ -30,11 +30,12 @@ export const handlers = [
     return HttpResponse.json(true, { status: 201 });
   }),
 
-  http.patch('/fakeApi/updateFood', async ({ request }: { request: any }) => {
+  http.put('/fakeApi/updateFood/:id', async ({ params, request }: { params: any, request: any }) => {
     await delay(ARTIFICIAL_DELAY_MS);
 
+    const { id } = params;
     const updatedfood = await request.json();
-    const index = foodFakeData.findIndex((food) => food.id === updatedfood.id);
+    const index = foodFakeData.findIndex((food) => food.id === id);
     foodFakeData.splice(index, 1, updatedfood);
 
     return HttpResponse.json(true);
