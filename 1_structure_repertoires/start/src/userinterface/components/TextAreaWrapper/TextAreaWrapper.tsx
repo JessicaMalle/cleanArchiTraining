@@ -1,13 +1,16 @@
-import { ReactNode } from "react";
-import { TextAreaWrapperViewModel } from "./TextAreaWrapperViewModel";
-import { Textarea } from "@chakra-ui/react";
+import { ReactNode } from 'react';
+import { TextAreaWrapperViewModel } from './TextAreaWrapperViewModel';
+import { Textarea } from '@chakra-ui/react';
 
 interface TextAreaWrapperProps {
   onChange?: (value: string) => void;
   placeholder?: string;
 }
 
-function TextAreaWrapper({ onChange, placeholder = "Enter description..." }: TextAreaWrapperProps): ReactNode {
+function TextAreaWrapper({
+  onChange,
+  placeholder = 'Enter description...',
+}: TextAreaWrapperProps): ReactNode {
   const { text, onChangeValue } = TextAreaWrapperViewModel();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

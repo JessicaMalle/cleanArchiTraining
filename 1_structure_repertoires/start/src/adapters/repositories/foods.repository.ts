@@ -1,5 +1,5 @@
-import { FoodsGateway } from "@foodsapp/infrastructure/gateways/foods.gateway";
-import {Food} from "@foodsapp/models/food.interface.ts";
+import { FoodsGateway } from '@foodsapp/infrastructure/gateways/foods.gateway';
+import { Food } from '@foodsapp/models/food.interface.ts';
 
 export function FoodsRespository() {
   return {
@@ -7,7 +7,7 @@ export function FoodsRespository() {
       const foodsGateway = FoodsGateway.getInstance();
 
       const { data, error } = await (foodsGateway as FoodsGateway).getFoods();
-      console.log("gateway data", data);
+      console.log('gateway data', data);
       return { data, error };
     },
 
@@ -15,7 +15,7 @@ export function FoodsRespository() {
       const foodsGateway = FoodsGateway.getInstance();
 
       const { data, error } = await (foodsGateway as FoodsGateway).createFood(food);
-      console.log("created food data", data);
+      console.log('created food data', data);
       return { data, error };
     },
   };

@@ -1,5 +1,5 @@
-import { Box, BoxProps, Flex, FlexProps, Text, TextProps } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { Box, BoxProps, Flex, FlexProps, Text, TextProps } from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
 // Root component
 interface CardRootProps extends FlexProps {
@@ -8,13 +8,7 @@ interface CardRootProps extends FlexProps {
 
 const Root = ({ children, ...props }: CardRootProps) => {
   return (
-    <Flex
-      flexDirection="column"
-      borderRadius="0.8rem"
-      overflow="hidden"
-      boxShadow="md"
-      {...props}
-    >
+    <Flex flexDirection="column" borderRadius="0.8rem" overflow="hidden" boxShadow="md" {...props}>
       {children}
     </Flex>
   );
@@ -27,11 +21,7 @@ interface CardBodyProps extends FlexProps {
 
 const Body = ({ children, ...props }: CardBodyProps) => {
   return (
-    <Flex
-      padding="1.6rem"
-      flexDirection="column"
-      {...props}
-    >
+    <Flex padding="1.6rem" flexDirection="column" {...props}>
       {children}
     </Flex>
   );
@@ -44,11 +34,7 @@ interface CardTitleProps extends TextProps {
 
 const Title = ({ children, ...props }: CardTitleProps) => {
   return (
-    <Text
-      fontSize="1.6rem"
-      fontWeight="700"
-      {...props}
-    >
+    <Text fontSize="1.6rem" fontWeight="700" {...props}>
       {children}
     </Text>
   );
@@ -61,10 +47,7 @@ interface CardDescriptionProps extends TextProps {
 
 const Description = ({ children, ...props }: CardDescriptionProps) => {
   return (
-    <Text
-      fontSize="1.4rem"
-      {...props}
-    >
+    <Text fontSize="1.4rem" {...props}>
       {children}
     </Text>
   );
@@ -77,12 +60,7 @@ interface CardFooterProps extends FlexProps {
 
 const Footer = ({ children, ...props }: CardFooterProps) => {
   return (
-    <Flex
-      padding="1.6rem"
-      justifyContent="flex-start"
-      alignItems="center"
-      {...props}
-    >
+    <Flex padding="1.6rem" justifyContent="flex-start" alignItems="center" {...props}>
       {children}
     </Flex>
   );

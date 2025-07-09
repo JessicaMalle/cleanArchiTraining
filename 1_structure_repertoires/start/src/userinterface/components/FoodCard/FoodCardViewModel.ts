@@ -1,8 +1,5 @@
-import {
-  BG_COLOR_TITLE_CARD,
-  COLOR_TITLE_CARD,
-} from "@foodsapp/utils/constants";
-import { useState } from "react";
+import { BG_COLOR_TITLE_CARD, COLOR_TITLE_CARD } from '@foodsapp/utils/constants';
+import { useState } from 'react';
 
 export function FoodCardViewModel() {
   const [colorTitleCard, setColorTitleCard] = useState(COLOR_TITLE_CARD);

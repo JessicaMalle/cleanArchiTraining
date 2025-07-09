@@ -1,8 +1,5 @@
-import { useSelector } from "@foodsapp/store";
-import {
-  selectFoods,
-  selectIsLoadingFoods,
-} from "@foodsapp/usecases/foods.usecase";
+import { useSelector } from '@foodsapp/store';
+import { selectFoods, selectIsLoadingFoods } from '@foodsapp/usecases/foods.usecase';
 
 export const FoodsPresenter = () => {
   const data = useSelector(selectFoods);

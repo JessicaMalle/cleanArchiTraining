@@ -1,16 +1,10 @@
 // FoodCardSkeleton.tsx
-import { Box, Skeleton } from "@chakra-ui/react";
-import { Card } from "../Card/Card";
+import { Box, Skeleton } from '@chakra-ui/react';
+import { Card } from '../Card/Card';
 
 export const FoodCardSkeleton = () => {
   return (
-    <Card.Root
-      flexDirection="row"
-      overflow="hidden"
-      width="48rem"
-      height="16rem"
-      cursor="wait"
-    >
+    <Card.Root flexDirection="row" overflow="hidden" width="48rem" height="16rem" cursor="wait">
       <Box position="relative" width="20rem" height="100%" bg="gray.200" overflow="hidden">
         <Skeleton height="100%" width="100%" />
       </Box>

@@ -1,7 +1,7 @@
-import {ReactNode} from "react";
+import { ReactNode } from 'react';
 
 function ActionButton(): ReactNode {
-	return <>ActionButton</>
+  return <>ActionButton</>;
 }
 
 export default ActionButton;

@@ -1,8 +1,8 @@
-import { foodReducer } from "@foodsapp/usecases/food.usecase.ts";
-import { foodsReducer } from "@foodsapp/usecases/foods.usecase.ts";
-import { configureStore } from "@reduxjs/toolkit";
-import { EqualityFn, useDispatch as useDispatchBasic } from "react-redux";
-import { useSelector as useSelectorBasic } from "react-redux";
+import { foodReducer } from '@foodsapp/usecases/food.usecase.ts';
+import { foodsReducer } from '@foodsapp/usecases/foods.usecase.ts';
+import { configureStore } from '@reduxjs/toolkit';
+import { EqualityFn, useDispatch as useDispatchBasic } from 'react-redux';
+import { useSelector as useSelectorBasic } from 'react-redux';
 
 export const reducer = {
   food: foodReducer,
@@ -12,7 +12,7 @@ export const reducer = {
 export const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type RootState = any;

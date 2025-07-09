@@ -1,6 +1,6 @@
 /* eslint-env jest */
-describe("test if config is ok ", () => {
-  test("", () => {
+describe('test if config is ok ', () => {
+  test('', () => {
     return;
   });
 });

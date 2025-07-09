@@ -1,12 +1,12 @@
-import { ReactNode, useState, useRef } from "react";
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { ReactNode, useState, useRef } from 'react';
+import { Box, Button, Image, Text } from '@chakra-ui/react';
 
 interface FileUploadProps {
   onChange?: (imageUrl: string) => void;
   label?: string;
 }
 
-function FileUpload({ onChange, label = "Upload Image" }: FileUploadProps): ReactNode {
+function FileUpload({ onChange, label = 'Upload Image' }: FileUploadProps): ReactNode {
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -36,7 +36,7 @@ function FileUpload({ onChange, label = "Upload Image" }: FileUploadProps): Reac
         accept="image/*"
         onChange={handleFileChange}
         ref={fileInputRef}
-        style={{ display: "none" }}
+        style={{ display: 'none' }}
       />
       <Button onClick={handleButtonClick} colorScheme="blue" mb={2}>
         {label}

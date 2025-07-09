@@ -8,15 +8,15 @@
  * you don't want to deal with this.
  */
 
-import { TextDecoder, TextEncoder } from "node:util";
+import { TextDecoder, TextEncoder } from 'node:util';
 
 Object.defineProperties(globalThis, {
   TextDecoder: { value: TextDecoder },
   TextEncoder: { value: TextEncoder },
 });
 
-const { Blob } = require("node:buffer");
-const { fetch, Headers, FormData, Request, Response } = require("undici");
+const { Blob } = require('node:buffer');
+const { fetch, Headers, FormData, Request, Response } = require('undici');
 
 Object.defineProperties(globalThis, {
   fetch: { value: fetch, writable: true },

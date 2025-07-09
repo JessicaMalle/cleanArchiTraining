@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export function NavBarViewModel() {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	return {navigate}
+  return { navigate };
 }

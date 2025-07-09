@@ -1,42 +1,39 @@
-import { GlobalStyles } from "@chakra-ui/theme-tools";
-import { ChakraTheme, extendTheme } from "@chakra-ui/react";
+import { GlobalStyles } from '@chakra-ui/theme-tools';
+import { ChakraTheme, extendTheme } from '@chakra-ui/react';
 
 export const global = {
   global: {
     html: {
-      fontSize: "62.5% !important",
-      overflowY: "overlay",
-      width: "100vw",
-      overflowX: "hidden",
+      fontSize: '62.5% !important',
+      overflowY: 'overlay',
+      width: '100vw',
+      overflowX: 'hidden',
     },
     body: {
-      fontSize: "1.6rem",
+      fontSize: '1.6rem',
       backgroundImage: "url('/appbg.jpg')",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
     },
-    "::-webkit-scrollbar-track": {
-      boxShadow: "inset 0 0 14px 14px transparent",
-      border: "solid 4px transparent",
+    '::-webkit-scrollbar-track': {
+      boxShadow: 'inset 0 0 14px 14px transparent',
+      border: 'solid 4px transparent',
     },
-    "::-webkit-scrollbar": {
-      width: "1.4rem",
-      height: "1.4rem",
+    '::-webkit-scrollbar': {
+      width: '1.4rem',
+      height: '1.4rem',
     },
-    "::-webkit-scrollbar-thumb": {
-      borderRadius: "1rem",
-      boxShadow: "inset 0 0 14px 14px #A7A5A6",
-      border: "4px solid transparent",
+    '::-webkit-scrollbar-thumb': {
+      borderRadius: '1rem',
+      boxShadow: 'inset 0 0 14px 14px #A7A5A6',
+      border: '4px solid transparent',
     },
   },
 } as GlobalStyles;
 
 type AgTypography = Partial<
-  Pick<
-    ChakraTheme,
-    "fonts" | "fontSizes" | "fontWeights" | "lineHeights" | "letterSpacings"
-  >
+  Pick<ChakraTheme, 'fonts' | 'fontSizes' | 'fontWeights' | 'lineHeights' | 'letterSpacings'>
 >;
 
 export const typography: AgTypography = {
@@ -49,8 +46,8 @@ export const typography: AgTypography = {
 
 export const colors = {
   primary: {
-    0: "#FFFFFF",
-    950: "#111111",
+    0: '#FFFFFF',
+    950: '#111111',
   },
 };
 
@@ -61,7 +58,7 @@ export const theme = extendTheme({
 });
 
 type ThemeType = typeof theme;
-declare module "@emotion/react" {
+declare module '@emotion/react' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface Theme extends ThemeType {}
 }
