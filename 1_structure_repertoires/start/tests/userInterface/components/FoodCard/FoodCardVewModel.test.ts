@@ -1,12 +1,9 @@
-import React from "react";
-import { FoodCardViewModel } from "@foodsapp/components/FoodCard/FoodCardViewModel";
+import React from 'react';
+import { FoodCardViewModel } from '@foodsapp/components/FoodCard/FoodCardViewModel';
 
-import {
-  BG_COLOR_TITLE_CARD,
-  COLOR_TITLE_CARD,
-} from "@foodsapp/utils/constants";
-describe("Test of FoodCardViewModel ", () => {
-  const useStateSpy = jest.spyOn(React, "useState");
+import { BG_COLOR_TITLE_CARD, COLOR_TITLE_CARD } from '@foodsapp/utils/constants';
+describe('Test of FoodCardViewModel ', () => {
+  const useStateSpy = jest.spyOn(React, 'useState');
   const setStateMock = jest.fn();
 
   beforeEach(() => {
@@ -17,7 +14,7 @@ describe("Test of FoodCardViewModel ", () => {
     jest.clearAllMocks();
   });
 
-  test("should change the color title and background color title on handleMouseEnterCard", () => {
+  test('should change the color title and background color title on handleMouseEnterCard', () => {
     // on va espionner la fonction setState et on va appliquer un spy
 
     const { handleMouseEnterCard } = FoodCardViewModel();
@@ -28,7 +25,7 @@ describe("Test of FoodCardViewModel ", () => {
     expect(setStateMock).toHaveBeenCalledWith(COLOR_TITLE_CARD);
   });
 
-  test("should change the color title and background color title on handleMouseLeaveCard", () => {
+  test('should change the color title and background color title on handleMouseLeaveCard', () => {
     // on va espionner la fonction setState et on va appliquer un spy
 
     const { handleMouseLeaveCard } = FoodCardViewModel();
