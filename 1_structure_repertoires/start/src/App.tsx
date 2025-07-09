@@ -13,7 +13,7 @@ function App() {
     { path: "/edit", element: <FoodEditPage /> },
     {
       path: "/edit/:foodId",
-      element: <FoodEditPage update={true} />,
+      element: <FoodEditPage />,
     },
     { path: "/display/:foodId", element: <FoodDisplayPage /> },
     { path: "*", element: <Navigate to="/" replace /> },

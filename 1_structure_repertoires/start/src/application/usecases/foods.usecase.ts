@@ -1,4 +1,3 @@
-import { FoodsState } from "@foodsapp/models/foods.interface";
 import {
   createAsyncThunk,
   createSelector,
@@ -6,12 +5,15 @@ import {
 } from "@reduxjs/toolkit";
 import { FoodsRespository } from "@foodsapp/adapters/repositories/foods.repository";
 import { RootState } from "@foodsapp/store";
+import { Food } from "@foodsapp/models/food.interface";
+import { FoodsState } from "@foodsapp/models/foods.interface";
 
 const initialState: FoodsState = {
   data: [],
   isLoading: false,
   errors: {
     getFoodsUseCaseErrorMessage: "",
+    createFoodUseCaseErrorMessage: "",
   },
 };
 
@@ -30,6 +32,20 @@ const foodsSlice = createSlice({
     builder.addCase(getFoodsUseCase.rejected, (state, action) => {
       state.isLoading = false;
       state.errors.getFoodsUseCaseErrorMessage =
+        action.error.message ?? "unknown error";
+    });
+
+    builder.addCase(createFoodUseCase.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createFoodUseCase.fulfilled, (state) => {
+      state.isLoading = false;
+      // The food was created successfully
+      // The component can dispatch getFoodsUseCase to refresh the list if needed
+    });
+    builder.addCase(createFoodUseCase.rejected, (state, action) => {
+      state.isLoading = false;
+      state.errors.createFoodUseCaseErrorMessage =
         action.error.message ?? "unknown error";
     });
   },
@@ -65,4 +81,17 @@ export const selectFoods = createSelector(selectFoodsState, ({ data }) => data);
 export const selectIsLoadingFoods = createSelector(
   selectFoodsState,
   ({ isLoading }) => isLoading
+);
+
+export const createFoodUseCase = createAsyncThunk(
+  "foods/createFood",
+  async (food: Food, {rejectWithValue}) => {
+    try {
+      const {data: createdFood} = await FoodsRespository().createFood(food);
+      return createdFood;
+    } catch (e) {
+      const error = e as Error;
+      return rejectWithValue(error);
+    }
+  }
 );

@@ -1,6 +1,6 @@
 import { Food } from "./food.interface";
 
-export const ERROR_KEYS = ["getFoodsUseCaseErrorMessage"] as const;
+export const ERROR_KEYS = ["getFoodsUseCaseErrorMessage", "createFoodUseCaseErrorMessage"] as const;
 
 export type FoodsState = {
   data: Food[];
