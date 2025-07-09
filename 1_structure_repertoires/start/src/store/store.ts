@@ -1,5 +1,5 @@
-import { foodReducer } from '@foodsapp/usecases/food.usecase.ts';
-import { foodsReducer } from '@foodsapp/usecases/foods.usecase.ts';
+import { apiFood, foodReducer } from '@foodsapp/usecases/food.usecase.ts';
+import {apiFoods, foodsReducer} from '@foodsapp/usecases/foods.usecase.ts';
 import { configureStore } from '@reduxjs/toolkit';
 import { EqualityFn, useDispatch as useDispatchBasic } from 'react-redux';
 import { useSelector as useSelectorBasic } from 'react-redux';
@@ -7,11 +7,16 @@ import { useSelector as useSelectorBasic } from 'react-redux';
 export const reducer = {
   food: foodReducer,
   foods: foodsReducer,
+  foodsApi: apiFoods.reducer,
+  foodApi: apiFood.reducer,
 };
 
 export const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(apiFood.middleware, apiFoods.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

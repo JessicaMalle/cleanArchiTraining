@@ -3,6 +3,7 @@ import { FoodsRespository } from '@foodsapp/adapters/repositories/foods.reposito
 import { RootState } from '@foodsapp/store';
 import { Food } from '@foodsapp/models/food.interface';
 import { FoodsState } from '@foodsapp/models/foods.interface';
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 const initialState: FoodsState = {
   data: [],
@@ -141,3 +142,17 @@ export const updateFoodUseCase = createAsyncThunk(
     }
   }
 );
+
+export const apiFoods = createApi({
+  reducerPath: 'foodsApi',
+  baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000'}),
+  tagTypes: ['Foods'],
+  endpoints(build) {
+    return {
+      getFoodsUseCase: build.query<Food[], void>({
+        query: () => '/foods',
+        providesTags: ['Foods']
+      })
+    };
+  }
+})
