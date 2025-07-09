@@ -1,9 +1,8 @@
-// FoodCardSkeleton.tsx
 import {Box, Skeleton, Card, CardBody} from '@chakra-ui/react';
 
 export const FoodCardSkeleton = () => {
   return (
-    <Card direction="row" overflow="hidden" width="48rem" height="16rem" cursor="wait">
+    <Card direction="row" overflow="hidden" width="48rem" height="200px" cursor="wait">
       <Box position="relative" width="20rem" height="100%" bg="gray.200" overflow="hidden">
         <Skeleton height="100%" width="100%"/>
       </Box>

@@ -24,12 +24,15 @@ export const FoodCard = ({ food }: FoodCardProps) => {
     >
       <Image
         objectFit='cover'
-        maxW={{ base: '100%', sm: '200px' }}
+        w={{ base: '200px', sm: '200px' }}
+        h={{ base: '200px', sm: '200px' }}
+        minW={'200px'}
+        minH={'200px'}
         src={food.thumbnail.url}
-        alt='Caffe Latte'
+        alt={`illustration: ${food.title}`}
       />
 
-      <Stack>
+      <Stack w="full">
         <CardBody bg={bgColorTitleCard}>
           <Heading size='md' color={colorTitleCard}>{food.title}</Heading>
 
